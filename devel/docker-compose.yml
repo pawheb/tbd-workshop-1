@@ -7,13 +7,12 @@ services:
       - seccomp:unconfined
     environment:
       - TZ=Europe/Warsaw
-    ports:
-      - 3000:3000
-      - 8080:8080
+    network_mode: "host"
     restart: unless-stopped
     volumes:
       - home-workspace-volume:/home/workspace
       - /var/run/docker.sock:/var/run/docker.sock
+      - ..:/home/repo
 volumes:
     home-workspace-volume:
         external: false
