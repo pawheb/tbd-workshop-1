@@ -224,7 +224,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
 
     a) In the Airflow UI (http://AIRFLOW_EXTERNAL_IP:8080, login: admin/admin), find the `dataproc_job` DAG, unpause it and trigger it manually.
 
-    ***place a screenshot of the DAG in the Airflow UI***
+    *** start here place a screenshot of the DAG in the Airflow UI***
 
     b) The DAG will fail. Examine the task logs in the Airflow UI to find the root cause.
 
@@ -245,7 +245,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     gsutil ls gs://PROJECT_NAME-data/data/shakespeare/
     ```
 
-    ***place a screenshot of the successful DAG run in Airflow UI***
+    ***place a screenshot of the successful DAG run in Airflow UI*** 
 
 11. Create a BigQuery dataset and an external table using SQL
 
