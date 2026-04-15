@@ -75,7 +75,7 @@ module "dataproc" {
   source        = "./modules/dataproc"
   project_name  = var.project_name
   region        = var.region
-  subnet        = module.vpc.subnets[local.notebook_subnet_id].id
+  subnet        = module.vpc.subnets[local.notebook_subnet_id].self_link
   machine_type  = "e2-standard-2"
   image_version = "2.2.69-ubuntu22"
 }
