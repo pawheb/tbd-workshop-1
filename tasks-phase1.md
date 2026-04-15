@@ -93,7 +93,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 8. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry_repository`, `google_storage_bucket`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
-
+```
   google_storage_bucket.tbd-state-bucket:
     storage_gb: 1
     monthly_class_a_operations: 1000
@@ -147,7 +147,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
     # Conservative “workshop-scale” assumptions
     storage_gb: 5
     monthly_egress_gb: 10
-
+```
   ![Infracost output screenshot](infracost-output.png)
     
 9. Find and correct the error in spark-job.py
