@@ -1,3 +1,7 @@
+# Add near the top (requires hashicorp/time provider in your root, see note below)
+resource "time_sleep" "wait_for_network" {
+  create_duration = "60s"
+}
 
 resource "google_project_service" "dataproc" {
   provider           = google
@@ -88,6 +92,7 @@ resource "google_storage_bucket_iam_member" "temp_bucket_iam" {
 resource "google_dataproc_cluster" "tbd-dataproc-cluster" {
   #checkov:skip=CKV_GCP_91: "Ensure Dataproc cluster is encrypted with Customer Supplied Encryption Keys (CSEK)"
   depends_on = [
+    time_sleep.wait_for_network,
     google_project_service.dataproc,
     google_service_account.dataproc_sa,
     google_project_iam_member.dataproc_worker,
