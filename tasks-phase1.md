@@ -57,9 +57,9 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
 1. Authors:
 
-   ***Group nr. 9***
+   Group nr. 9
 
-   ***https://github.com/pawheb/tbd-workshop-1***
+   https://github.com/pawheb/tbd-workshop-1
 
 2. Follow all steps in README.md.
 
@@ -70,8 +70,7 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
     2. Create PR from this branch to **YOUR** master and merge it to make new release.
 
-    ***place the screenshot from GA after successful application of release***
-
+    ![Successful release screenshot](successful-release.png)
 
 5. Analyze terraform code. Play with terraform plan, terraform graph to investigate different modules.
 
@@ -94,11 +93,63 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 8. Create a new PR and add costs by entering the expected consumption into Infracost
 For all the resources of type: `google_artifact_registry_repository`, `google_storage_bucket`
 create a sample usage profiles and add it to the Infracost task in CI/CD pipeline. Usage file [example](https://github.com/infracost/infracost/blob/master/infracost-usage-example.yml)
+```
+  google_storage_bucket.tbd-state-bucket:
+    storage_gb: 1
+    monthly_class_a_operations: 1000
+    monthly_class_b_operations: 5000
+    monthly_data_retrieval_gb: 0.1
+    monthly_egress_gb: 0.1
 
-   ***place the expected consumption you entered here***
+  google_storage_bucket.tbd-code-bucket:
+    storage_gb: 2
+    monthly_class_a_operations: 5000
+    monthly_class_b_operations: 20000
+    monthly_data_retrieval_gb: 1
+    monthly_egress_gb: 1
 
-   ***place the screenshot from infracost output here***
+  google_storage_bucket.tbd-data-bucket:
+    storage_gb: 20
+    monthly_class_a_operations: 10000
+    monthly_class_b_operations: 50000
+    monthly_data_retrieval_gb: 5
+    monthly_egress_gb: 5
 
+  google_storage_bucket.notebook-conf-bucket:
+    storage_gb: 1
+    monthly_class_a_operations: 1000
+    monthly_class_b_operations: 5000
+    monthly_data_retrieval_gb: 0.5
+    monthly_egress_gb: 0.5
+
+  google_storage_bucket.mlflow_artifacts_bucket:
+    storage_gb: 10
+    monthly_class_a_operations: 10000
+    monthly_class_b_operations: 50000
+    monthly_data_retrieval_gb: 2
+    monthly_egress_gb: 2
+
+  google_storage_bucket.dataproc_staging:
+    storage_gb: 5
+    monthly_class_a_operations: 5000
+    monthly_class_b_operations: 20000
+    monthly_data_retrieval_gb: 2
+    monthly_egress_gb: 2
+
+  google_storage_bucket.dataproc_temp:
+    storage_gb: 5
+    monthly_class_a_operations: 5000
+    monthly_class_b_operations: 20000
+    monthly_data_retrieval_gb: 2
+    monthly_egress_gb: 2
+
+  google_artifact_registry_repository.registry:
+    # Conservative “workshop-scale” assumptions
+    storage_gb: 5
+    monthly_egress_gb: 10
+```
+  ![Infracost output screenshot](infracost-output.png)
+    
 9. Find and correct the error in spark-job.py
 
     After `terraform apply` completes, connect to the Airflow cluster:

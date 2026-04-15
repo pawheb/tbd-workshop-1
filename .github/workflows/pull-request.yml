@@ -156,7 +156,8 @@ jobs:
       run: |
         infracost breakdown --path="." \
                             --format=json \
-                            --out-file=/tmp/infracost-base.json
+                            --out-file=/tmp/infracost-base.json \
+                            --usage-file=infracost.yml
     - name: Checkout PR branch
       uses: actions/checkout@v3
     - name: Generate Infracost diff
@@ -164,7 +165,8 @@ jobs:
         infracost diff --path="." \
                         --format=json \
                         --compare-to=/tmp/infracost-base.json \
-                        --out-file=/tmp/infracost.json
+                        --out-file=/tmp/infracost.json \
+                        --usage-file=infracost.yml
     - name: Post Infracost comment
       run: |
           infracost comment github --path=/tmp/infracost.json \
