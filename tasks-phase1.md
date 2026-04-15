@@ -57,9 +57,9 @@ IMPORTANT ❗ ❗ ❗ Please remember to destroy all the resources after each wo
 
 1. Authors:
 
-   ***enter your group nr***
+   ***Group nr. 9***
 
-   ***link to forked repo***
+   ***https://github.com/pawheb/tbd-workshop-1***
 
 2. Follow all steps in README.md.
 
