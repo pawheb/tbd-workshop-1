@@ -313,7 +313,7 @@ create a sample usage profiles and add it to the Infracost task in CI/CD pipelin
       }
     }
     ```
-    link to the changed file: https://github.com/BrunoKedzierski/tbd-workshop-1/blob/master/modules/dataproc/main.tf
+    link to the changed file: https://github.com/pawheb/tbd-workshop-1/blob/master/modules/dataproc/main.tf
 
 13. Triggered Terraform Destroy on Schedule or After PR Merge. Goal: make sure we never forget to clean up resources and burn money.
 
