@@ -280,6 +280,7 @@ jobs:
         run: terraform destroy -no-color -var-file env/project.tfvars -auto-approve
         continue-on-error: false
 ```
-***paste screenshot/log snippet confirming the auto-destroy ran***
 
-***write one sentence why scheduling cleanup helps in this workshop***
+![Successful auto-destroy screenshot](successful-auto-destroy.png)
+
+Scheduling cleanup ensures cloud resources are automatically destroyed even if someone forgets to run terraform destroy manually through the github action, preventing unnecessary GCP costs between workshop sessions.
