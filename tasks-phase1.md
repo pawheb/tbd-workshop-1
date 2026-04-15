@@ -225,8 +225,61 @@ Steps:
 
 Hint: use the existing `.github/workflows/destroy.yml` as a starting point.
 
-***paste workflow YAML here***
+`auto-destroy.yml`
+```
+name: Auto Destroy
 
+on:
+  schedule:
+    # Every day at 20:00 UTC
+    - cron: "0 20 * * *"
+
+  pull_request:
+    types: [closed]
+    branches: [master]
+
+permissions: read-all
+
+jobs:
+  destroy:
+    # Only run when:
+    # - scheduled event, OR
+    # - PR was merged AND the PR title contains "[CLEANUP]"
+    if: >
+      github.event_name == 'schedule' ||
+      (github.event.pull_request.merged == true && contains(github.event.pull_request.title, '[CLEANUP]'))
+
+    runs-on: ubuntu-latest
+
+    # Must allow OIDC auth to GCP
+    permissions:
+      contents: write
+      id-token: write
+      pull-requests: write
+      issues: write
+
+    steps:
+      - uses: actions/checkout@v3
+
+      - uses: hashicorp/setup-terraform@v2
+        with:
+          terraform_version: 1.11.0
+
+      - id: auth
+        name: Authenticate to Google Cloud
+        uses: google-github-actions/auth@v1
+        with:
+          token_format: access_token
+          workload_identity_provider: ${{ secrets.GCP_WORKLOAD_IDENTITY_PROVIDER_NAME }}
+          service_account: ${{ secrets.GCP_WORKLOAD_IDENTITY_SA_EMAIL }}
+
+      - name: Terraform Init
+        run: terraform init -backend-config=env/backend.tfvars
+
+      - name: Terraform Destroy
+        run: terraform destroy -no-color -var-file env/project.tfvars -auto-approve
+        continue-on-error: false
+```
 ***paste screenshot/log snippet confirming the auto-destroy ran***
 
 ***write one sentence why scheduling cleanup helps in this workshop***
